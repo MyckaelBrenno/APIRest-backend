@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.biblioteca.main.Cliente;
+import br.com.biblioteca.main.Livros;
 import br.com.biblioteca.repositories.ClienteRepository;
 import br.com.biblioteca.service.execption.ObjectNotFoundException;
 
@@ -28,6 +29,20 @@ public class ClienteService {
 	public List<Cliente> findAll(Integer id_cat) {
 		categoriaService.findById(id_cat);
 		return repository.findAllByCategoria(id_cat);
+	}
+
+	public Cliente update(Integer id, Cliente obj) {
+		Cliente newObj = findById(id);
+		updateData(newObj, obj);
+		return repository.save(newObj);
+
+	}
+	private void updateData(Cliente newObj, Cliente obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setRua(obj.getRua());
+		newObj.setBairro(obj.getBairro());
+		newObj.setCidade(obj.getCidade());
+		newObj.setUf(obj.getUf());
 	}
 
 }
