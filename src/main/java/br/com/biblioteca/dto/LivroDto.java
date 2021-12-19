@@ -10,6 +10,7 @@ public class LivroDto implements Serializable {
 	
 	private Integer id;
 	private String titulo;
+	private String Status;
 	
 	public LivroDto() {
 		super();
@@ -19,6 +20,14 @@ public class LivroDto implements Serializable {
 		super();
 		this.id = obj.getId();
 		this.titulo = obj.getTitulo();
+		this.Status = obj.getStatus();
+	}
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
 	}
 
 	public Integer getId() {
