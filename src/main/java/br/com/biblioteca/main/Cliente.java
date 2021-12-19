@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,10 +23,25 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotEmpty(message = "Campo NOME é obrigatório")
+	@Length(min = 3, max = 100, message = "O campo NOME deve ter entre 3 e 100 Caracteres")
 	private String nome;
+	
+	@NotEmpty(message = "Campo RUA é obrigatório")
+	@Length(min = 3, max = 100, message = "O campo RUA deve ter entre 3 e 100 Caracteres")
 	private String rua;
+	
+	@NotEmpty(message = "Campo BAIRRO é obrigatório")
+	@Length(min = 3, max = 100, message = "O campo BAIRRO deve ter entre 3 e 100 Caracteres")
 	private String bairro;
+	
+	@NotEmpty(message = "Campo CIDADE é obrigatório")
+	@Length(min = 3, max = 100, message = "O campo CIDADE deve ter entre 3 e 100 Caracteres")
 	private String cidade;
+	
+	@NotEmpty(message = "Campo UF é obrigatório")
+	@Length(min = 2, max = 2, message = "O campo UF deve ter 2 Caracteres")
 	private String uf;
 	
 	@JsonIgnore

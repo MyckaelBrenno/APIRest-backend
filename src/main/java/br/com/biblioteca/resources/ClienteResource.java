@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,6 +26,7 @@ import br.com.biblioteca.main.Cliente;
 import br.com.biblioteca.main.Livros;
 import br.com.biblioteca.service.ClienteService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/cliente")
 public class ClienteResource {
@@ -45,20 +49,20 @@ public class ClienteResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Cliente> update(@PathVariable Integer id, @RequestBody Cliente obj) {
+	public ResponseEntity<Cliente> update(@PathVariable Integer id, @Valid @RequestBody Cliente obj) {
 		Cliente newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}
 	
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<Cliente> updatePacth(@PathVariable Integer id, @RequestBody Cliente obj) {
+	public ResponseEntity<Cliente> updatePacth(@PathVariable Integer id, @Valid @RequestBody Cliente obj) {
 		Cliente newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}
 	
 	@PostMapping
 	public ResponseEntity<Cliente> create(@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat,
-			@RequestBody Cliente obj) {
+			@Valid @RequestBody Cliente obj) {
 		Cliente newObj = service.create(id_cat, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/cliente/{id}")
 				.buildAndExpand(newObj.getId()).toUri();
